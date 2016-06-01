@@ -21,6 +21,7 @@ class MetaRouter extends AbstractMiddleware
 
     public function __construct($routers = [])
     {
+
         $this->routers = Collection::cast($routers);
     }
 
@@ -30,7 +31,7 @@ class MetaRouter extends AbstractMiddleware
      */
     public function register(RouterInterface $router)
     {
-        $this->routers->append($router); 
+        $this->routers->prepend($router);
     }
 
     /**

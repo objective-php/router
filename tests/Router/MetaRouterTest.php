@@ -72,7 +72,8 @@ class MetaRouterTest extends TestCase
 
         $metaRouter->register($router2);
 
-        $this->assertEquals(new Collection([$router2, $router1]), $metaRouter->getRegisteredRouters());
+        $this->assertSame($router2, $metaRouter->getRegisteredRouters()->toArray()[0]);
+        $this->assertSame($router1, $metaRouter->getRegisteredRouters()->toArray()[1]);
 
     }
 }
