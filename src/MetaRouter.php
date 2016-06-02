@@ -53,7 +53,6 @@ class MetaRouter extends AbstractMiddleware
             throw new Exception('Unable to route request: no router has been registered');
         }
 
-
         $matchedRoute = null;
         
         /** @var RouterInterface $router */

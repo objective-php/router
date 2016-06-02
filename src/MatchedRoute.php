@@ -76,11 +76,13 @@ class MatchedRoute
     {
         return $this->router;
     }
-
+    
+    /**
+     * @return Collection
+     */
     public function getParams() : Collection
     {
         return $this->params;
     }
-
 
 }
