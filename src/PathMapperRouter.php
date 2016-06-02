@@ -3,7 +3,9 @@
 namespace ObjectivePHP\Router;
 
 use ObjectivePHP\Application\ApplicationInterface;
-use ObjectivePHP\Application\Config\UrlAlias;
+use ObjectivePHP\Application\Config\ActionNamespace;
+use ObjectivePHP\Primitives\String\Str;
+use ObjectivePHP\Router\Config\UrlAlias;
 use ObjectivePHP\Router\Config\SimpleRoute;
 
 /**
@@ -11,7 +13,6 @@ use ObjectivePHP\Router\Config\SimpleRoute;
  *
  * This very basic router just maps the current URL to the route
  *
- * @deprecated
  * @package ObjectivePHP\Application\Operation\Common
  */
 class PathMapperRouter implements RouterInterface
@@ -32,21 +33,21 @@ class PathMapperRouter implements RouterInterface
         {
             $path = $aliases[$path] ?? $path;
         }
-        
-        // look for matching route
-        $routes = $app->getConfig()->subset(SimpleRoute::class)->reverse();
-        /** @var SimpleRoute $route */
 
-        foreach($routes as $alias => $route)
+
+        $actionClass = $this->resolveActionClassName($path);
+
+        $registeredActionNamespaces = $app->getConfig()->get(ActionNamespace::class);
+        $action = $this->resolveActionFullyQualifiedName($actionClass, $registeredActionNamespaces);
+
+        if(!$action)
         {
-            if($route->matches($app->getRequest()))
-            {
-                return new RoutingResult(new MatchedRoute($this, $alias, $route->getAction()));
-            }
+            return new RoutingResult();
         }
 
+
         // return empty RoutingResult
-        return new RoutingResult();
+        return new RoutingResult(new MatchedRoute($this, $path, $action));
         
     }
 
@@ -55,5 +56,56 @@ class PathMapperRouter implements RouterInterface
         // TODO: Implement url() method.
     }
 
+    /**
+     * @param $path
+     *
+     * @return string
+     */
+    protected function resolveActionClassName($path)
+    {
+
+        // clean path name
+        $path = Str::cast($path);
+        $path->trim('/');
+
+        $namespaces = $path->split('/');
+
+        $namespaces->each(function (&$namespace)
+        {
+            $parts = explode('-', $namespace);
+            array_walk($parts, function (&$part)
+            {
+                $part = ucfirst($part);
+            });
+
+            $namespace = implode('', $parts);
+        });
+
+        $backslash = '\\';
+
+        $className = str_replace('\\\\', '\\', implode($backslash, $namespaces->toArray()));
+
+        return $className;
+    }
+
+    /**
+     * @param $className
+     *
+     * @return null|string
+     */
+    public function resolveActionFullyQualifiedName($className, $registeredActionNamespaces)
+    {
+
+        foreach((array) $registeredActionNamespaces as $namespace)
+        {
+            $fullClassName = $namespace . '\\' . $className;
+            if(class_exists('\\' . $fullClassName))
+            {
+                return $fullClassName;
+            }
+        }
+
+        return null;
+    }
 
 }

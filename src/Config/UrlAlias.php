@@ -7,7 +7,7 @@
      * @license http://opensource.org/licenses/GPL-3.0 GNU GPL License 3.0
      */
     
-    namespace ObjectivePHP\Application\Config;
+    namespace ObjectivePHP\Router\Config;
     
     
     use ObjectivePHP\Config\SingleValueDirectiveGroup;
