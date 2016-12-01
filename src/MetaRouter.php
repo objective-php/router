@@ -69,7 +69,7 @@ class MetaRouter extends AbstractMiddleware
         
         if(is_null($matchedRoute))
         {
-            throw new Exception('Unable to route request: no route matched requested URL');
+            throw new Exception('Unable to route request: no route matched requested URL', 404);
         }
         
         $app->getRequest()->setMatchedRoute($matchedRoute);
