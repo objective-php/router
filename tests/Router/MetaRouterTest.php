@@ -14,8 +14,10 @@ use ObjectivePHP\PHPUnit\TestCase;
 use ObjectivePHP\Primitives\Collection\Collection;
 use ObjectivePHP\Router\Exception;
 use ObjectivePHP\Router\MetaRouter;
+use ObjectivePHP\Router\NoRouteFoundException;
 use ObjectivePHP\Router\RouterInterface;
 use ObjectivePHP\Router\RoutingResult;
+use Psr\Http\Message\RequestInterface;
 
 class MetaRouterTest extends TestCase
 {
@@ -31,6 +33,13 @@ class MetaRouterTest extends TestCase
         },
             Exception::class
         );
+
+        $this->expectsException(
+            function () use ($metaRouter) {
+                $metaRouter->routeRequest($this->getMock(RequestInterface::class));
+                },
+            Exception::class
+        );
     }
 
     public function testFailsWhenNoRouterMatchesARoute()
@@ -43,6 +52,7 @@ class MetaRouterTest extends TestCase
         $routingResult->method('didMatch')->willReturn(false);
 
         $router->expects($this->once())->method('route')->willReturn($routingResult);
+        $router->expects($this->once())->method('routeRequest')->willReturn($routingResult);
 
         $metaRouter->register($router);
 
@@ -52,6 +62,14 @@ class MetaRouterTest extends TestCase
             $metaRouter->run($this->getMock(ApplicationInterface::class));
         },
             Exception::class, 'no route matched requested URL'
+        );
+
+        $this->expectsException(
+            function () use ($metaRouter) {
+                $metaRouter->routeRequest($this->getMock(RequestInterface::class));
+            },
+            NoRouteFoundException::class,
+            'no route matched requested URL'
         );
     }
 
