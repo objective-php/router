@@ -4,6 +4,7 @@ namespace ObjectivePHP\Router;
 
 use ObjectivePHP\Application\ApplicationInterface;
 use ObjectivePHP\Application\Middleware\AbstractMiddleware;
+use ObjectivePHP\Message\Request\HttpRequest;
 use ObjectivePHP\Primitives\Collection\Collection;
 
 
@@ -72,7 +73,9 @@ class MetaRouter extends AbstractMiddleware
             throw new Exception('Unable to route request: no route matched requested URL', 404);
         }
 
-        $app->getRequest()->getParameters()->setRoute($matchedRoute->getParams());
+        if($app->getRequest() instanceof HttpRequest) {
+            $app->getRequest()->getParameters()->setRoute($matchedRoute->getParams());
+        }
         $app->getRequest()->setMatchedRoute($matchedRoute);
     }
 }
