@@ -38,5 +38,28 @@ A ```RoutingResult``` that did match is able to return a ```MatchedRoute``` inst
 ## Performance
 
 Using several routers can help dealing with performance issue, since it allows to use advanced routes when needed only. Please note that the later a Router is registered, the higher is its priority in the routing loop.
- 
+
+## Usage
+### Standalone
+```php
+use GuzzleHttp\Psr7\ServerRequest;
+use ObjectivePHP\Package\FastRoute\FastRouteRouter;
+use ObjectivePHP\Router\MetaRouter;
+
+
+// Create the main MetaRouter
+$metaRouter = new MetaRouter();
+
+// Register the routers
+$metaRouter->register(new FastRouteRouter());
+
+// Route the request to get the RoutingResult
+$result = $metaRouter->routeRequest(ServerRequest::fromGlobals());
+
+// You can render your action
+echo $result->getMatchedRoute()->getAction()();
+
+// Or, if you want to use it in an Objective PHP application
+$app->getRequest()->setMatchedRoute($result->getMatchedRoute());
+```
  

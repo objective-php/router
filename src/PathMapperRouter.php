@@ -6,7 +6,6 @@ use ObjectivePHP\Application\ApplicationInterface;
 use ObjectivePHP\Application\Config\ActionNamespace;
 use ObjectivePHP\Primitives\String\Str;
 use ObjectivePHP\Router\Config\UrlAlias;
-use ObjectivePHP\Router\Config\SimpleRoute;
 
 /**
  * Class PathMapperRouter
