@@ -12,7 +12,7 @@ namespace Test\ObjectivePHP\Router;
 use ObjectivePHP\Application\ApplicationInterface;
 use ObjectivePHP\PHPUnit\TestCase;
 use ObjectivePHP\Primitives\Collection\Collection;
-use ObjectivePHP\Router\Exception;
+use ObjectivePHP\Router\Exception\RoutingException;
 use ObjectivePHP\Router\MetaRouter;
 use ObjectivePHP\Router\RouterInterface;
 use ObjectivePHP\Router\RoutingResult;
@@ -29,7 +29,7 @@ class MetaRouterTest extends TestCase
 
             $metaRouter->run($this->getMock(ApplicationInterface::class));
         },
-            Exception::class
+            RoutingException::class
         );
     }
 
@@ -51,7 +51,7 @@ class MetaRouterTest extends TestCase
 
             $metaRouter->run($this->getMock(ApplicationInterface::class));
         },
-            Exception::class, 'no route matched requested URL'
+            RoutingException::class, 'no route matched requested URL'
         );
     }
 

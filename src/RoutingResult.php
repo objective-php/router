@@ -16,19 +16,19 @@ class RoutingResult
      */
     public function __construct(MatchedRoute $matchedRoute = null)
     {
-        if($matchedRoute) $this->matchedRoute = $matchedRoute;
+        if ($matchedRoute) $this->matchedRoute = $matchedRoute;
     }
 
     /**
      * @return bool
      */
-    public function didMatch() : bool
+    public function didMatch(): bool
     {
-        return (bool) $this->matchedRoute;
+        return (bool)$this->matchedRoute;
     }
 
     /**
-     * @return mixed
+     * @return MatchedRoute
      */
     public function getMatchedRoute()
     {

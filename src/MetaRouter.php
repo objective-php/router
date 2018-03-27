@@ -3,16 +3,15 @@
 namespace ObjectivePHP\Router;
 
 use ObjectivePHP\Application\ApplicationInterface;
-use ObjectivePHP\Application\Middleware\AbstractMiddleware;
-use ObjectivePHP\Message\Request\HttpRequest;
 use ObjectivePHP\Primitives\Collection\Collection;
+use ObjectivePHP\Router\Exception\RoutingException;
 
 
 /**
  * Class MetaRouter
  * @package ObjectivePHP\Router
  */
-class MetaRouter extends AbstractMiddleware
+class MetaRouter implements RouterInterface
 {
 
     /**
@@ -30,9 +29,11 @@ class MetaRouter extends AbstractMiddleware
     /**
      * @param RouterInterface $router
      */
-    public function register(RouterInterface $router)
+    public function registerRouter(RouterInterface $router)
     {
         $this->routers->prepend($router);
+
+        return $this;
     }
 
     /**
@@ -45,37 +46,43 @@ class MetaRouter extends AbstractMiddleware
 
     /**
      * @param ApplicationInterface $app
-     * @throws Exception
+     * @throws RoutingException
      */
-    public function run(ApplicationInterface $app)
+    public function route(ApplicationInterface $app): RoutingResult
     {
-        if(!$this->routers)
-        {
-            throw new Exception('Unable to route request: no router has been registered');
+        if (!$this->routers) {
+            throw new RoutingException('Unable to route request: no router has been registered.', 500);
         }
 
         $matchedRoute = null;
-        
+
         /** @var RouterInterface $router */
-        foreach($this->routers as $router) 
-        {
+        foreach ($this->routers as $router) {
             $routingResult = $router->route($app);
-            
-            if($routingResult->didMatch())
-            {
-                $matchedRoute = $routingResult->getMatchedRoute();
+            if ($routingResult->didMatch()) {
                 break;
             }
         }
-        
-        if(is_null($matchedRoute))
-        {
-            throw new Exception('Unable to route request: no route matched requested URL', 404);
+
+        if (!$routingResult->didMatch()) {
+            throw new RoutingException('Unable to route request: no route matched requested URL', 404);
         }
 
-        if($app->getRequest() instanceof HttpRequest) {
-            $app->getRequest()->getParameters()->setRoute($matchedRoute->getParams());
-        }
-        $app->getRequest()->setMatchedRoute($matchedRoute);
+        return $routingResult;
+
     }
+
+    public function url($route, $params = [])
+    {
+        /** @var RouterInterface $router */
+        foreach ($this->routers as $router) {
+            if ($url = $router->url($route, $params)) {
+                return $url;
+            }
+        }
+
+        return null;
+    }
+
+
 }

@@ -3,10 +3,10 @@
 namespace ObjectivePHP\Router;
 
 use ObjectivePHP\Application\ApplicationInterface;
-use ObjectivePHP\Application\Config\ActionNamespace;
-use ObjectivePHP\Primitives\String\Str;
+use ObjectivePHP\Router\Config\ActionNamespace;
 use ObjectivePHP\Router\Config\UrlAlias;
-use ObjectivePHP\Router\Config\SimpleRoute;
+use ObjectivePHP\Router\Exception\RoutingException;
+use Psr\Http\Server\MiddlewareInterface;
 
 /**
  * Class PathMapperRouter
@@ -17,43 +17,65 @@ use ObjectivePHP\Router\Config\SimpleRoute;
  */
 class PathMapperRouter implements RouterInterface
 {
-    public function route(ApplicationInterface $app) : RoutingResult
+    public function route(ApplicationInterface $app): RoutingResult
     {
         $path = rtrim($app->getRequest()->getUri()->getPath(), '/');
-        
+
         // default to home
-        if(!$path)
-        {
+        if (!$path) {
             $path = '/';
         }
-        
+
         // check if path is routed
-        $aliases = $app->getConfig()->subset(UrlAlias::class);
-        if($aliases)
-        {
+        $aliases = $app->getConfig()->get(UrlAlias::KEY);
+        if ($aliases) {
             $path = $aliases[$path] ?? $path;
         }
 
+        $action = null;
 
-        $actionClass = $this->resolveActionClassName($path);
+        // search for explicitly declared middleware
+        if ($app->getServicesFactory()->has($path)) {
+            $action = $app->getServicesFactory()->get($path);
+        } else {
 
-        $registeredActionNamespaces = $app->getConfig()->get(ActionNamespace::class);
-        $action = $this->resolveActionFullyQualifiedName($actionClass, $registeredActionNamespaces);
+            $actionClass = $this->resolveActionClassName($path);
 
-        if(!$action)
-        {
+            $registeredActionNamespaces = $app->getConfig()->get(ActionNamespace::KEY);
+            
+            $actionFqcn = $this->resolveActionFullyQualifiedName($actionClass, $registeredActionNamespaces);
+
+            if ($actionFqcn) {
+                if ($app->getServicesFactory()->has($actionFqcn)) {
+                    $action = $app->getServicesFactory()->get($actionFqcn);
+                } else {
+                    $action = new $actionFqcn;
+                    $app->getServicesFactory()->injectDependencies($action);
+                }
+            }
+
+        }
+
+        if (!$action) {
             return new RoutingResult();
+        }
+
+        // check action is a Middleware
+        if (!$action instanceof MiddlewareInterface) {
+            throw new RoutingException('Service matching current route does not implement ' . MiddlewareInterface::class);
         }
 
 
         // return empty RoutingResult
-        return new RoutingResult(new MatchedRoute($this, $path, $action));
-        
+        return new RoutingResult(new MatchedRoute($path, $action));
+
     }
 
     public function url($route, $params = [])
     {
         // TODO: Implement url() method.
+
+        return null;
     }
 
     /**
@@ -65,25 +87,24 @@ class PathMapperRouter implements RouterInterface
     {
 
         // clean path name
-        $path = Str::cast($path);
-        $path->trim('/');
+        $path = trim($path, '/');
 
-        $namespaces = $path->split('/');
+        $namespaces = explode('/', $path);
 
-        $namespaces->each(function (&$namespace)
-        {
+        foreach ($namespaces as &$namespace) {
+
             $parts = explode('-', $namespace);
-            array_walk($parts, function (&$part)
-            {
+
+            array_walk($parts, function (&$part) {
                 $part = ucfirst($part);
             });
 
             $namespace = implode('', $parts);
-        });
+        }
 
         $backslash = '\\';
 
-        $className = str_replace('\\\\', '\\', implode($backslash, $namespaces->toArray()));
+        $className = str_replace('\\\\', '\\', implode($backslash, $namespaces));
 
         return $className;
     }
@@ -95,12 +116,10 @@ class PathMapperRouter implements RouterInterface
      */
     public function resolveActionFullyQualifiedName($className, $registeredActionNamespaces)
     {
-
-        foreach((array) $registeredActionNamespaces as $namespace)
-        {
-            $fullClassName = $namespace . '\\' . $className;
-            if(class_exists('\\' . $fullClassName))
-            {
+        //var_dump($registeredActionNamespaces);
+        foreach ((array)$registeredActionNamespaces as $namespace) {
+            $fullClassName = trim($namespace, '\\') . '\\' . $className;
+            if (class_exists('\\' . $fullClassName)) {
                 return $fullClassName;
             }
         }

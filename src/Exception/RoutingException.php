@@ -6,10 +6,10 @@
  * Time: 18:04
  */
 
-namespace ObjectivePHP\Router;
+namespace ObjectivePHP\Router\Exception;
 
 
-class Exception extends \Exception
+class RoutingException extends \Exception
 {
     
 }

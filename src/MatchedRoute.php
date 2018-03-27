@@ -10,6 +10,7 @@ namespace ObjectivePHP\Router;
 
 
 use ObjectivePHP\Primitives\Collection\Collection;
+use Psr\Http\Server\MiddlewareInterface;
 
 /**
  * Class MatchedRoute
@@ -23,7 +24,7 @@ class MatchedRoute
     protected $name;
 
     /**
-     * @var mixed
+     * @var MiddlewareInterface
      */
     protected $action;
 
@@ -45,12 +46,11 @@ class MatchedRoute
      * @param $action
      * @param array $params
      */
-    public function __construct(RouterInterface $router, string $name, $action, $params = [])
+    public function __construct(string $name, MiddlewareInterface $action, $params = [])
     {
-        $this->router = $router;
         $this->name = $name;
         $this->action = $action;
-        $this->params = Collection::cast($params);
+        $this->params = $params;
     }
 
     /**
@@ -67,22 +67,6 @@ class MatchedRoute
     public function getAction()
     {
         return $this->action;
-    }
-
-    /**
-     * @return RouterInterface
-     */
-    public function getRouter() : RouterInterface
-    {
-        return $this->router;
-    }
-    
-    /**
-     * @return Collection
-     */
-    public function getParams() : Collection
-    {
-        return $this->params;
     }
 
 }
