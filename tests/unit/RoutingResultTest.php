@@ -3,11 +3,11 @@
 namespace Test\ObjectivePHP\Router;
 
 
-use ObjectivePHP\PHPUnit\TestCase;
+use Codeception\Test\Unit;
 use ObjectivePHP\Router\MatchedRoute;
 use ObjectivePHP\Router\RoutingResult;
 
-class RoutingResultTest extends TestCase
+class RoutingResultTest extends Unit
 {
     public function testDidNotMatch()
     {
@@ -20,7 +20,7 @@ class RoutingResultTest extends TestCase
     {
         $matchedRoute = $this->getMockBuilder(MatchedRoute::class)->disableOriginalConstructor()->getMock();
         $routingResult = new RoutingResult($matchedRoute);
-        
+
         $this->assertTrue($routingResult->didMatch());
         $this->assertSame($matchedRoute, $routingResult->getMatchedRoute());
     }

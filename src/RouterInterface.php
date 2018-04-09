@@ -2,11 +2,12 @@
 
 namespace ObjectivePHP\Router;
 
-use ObjectivePHP\Application\ApplicationInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
 interface RouterInterface
 {
-    public function route(ApplicationInterface $app) : RoutingResult;
+    public function route(ServerRequestInterface $request, RequestHandlerInterface $handler): RoutingResult;
 
     public function url($route, $params = []);
 }

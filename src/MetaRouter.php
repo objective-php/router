@@ -2,9 +2,10 @@
 
 namespace ObjectivePHP\Router;
 
-use ObjectivePHP\Application\ApplicationInterface;
 use ObjectivePHP\Primitives\Collection\Collection;
 use ObjectivePHP\Router\Exception\RoutingException;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
 
 /**
@@ -19,7 +20,11 @@ class MetaRouter implements RouterInterface
      */
     protected $routers;
 
-    public function __construct($routers = [])
+    /**
+     * MetaRouter constructor.
+     * @param array $routers
+     */
+    public function __construct(RouterInterface ...$routers)
     {
 
         $this->routers = Collection::cast($routers);
@@ -45,12 +50,13 @@ class MetaRouter implements RouterInterface
     }
 
     /**
-     * @param ApplicationInterface $app
+     * @param RequestHandlerInterface $handler
+     * @return RoutingResult
      * @throws RoutingException
      */
-    public function route(ApplicationInterface $app): RoutingResult
+    public function route(ServerRequestInterface $request, RequestHandlerInterface $handler): RoutingResult
     {
-        if (!$this->routers) {
+        if ($this->routers->isEmpty()) {
             throw new RoutingException('Unable to route request: no router has been registered.', 500);
         }
 
@@ -58,7 +64,7 @@ class MetaRouter implements RouterInterface
 
         /** @var RouterInterface $router */
         foreach ($this->routers as $router) {
-            $routingResult = $router->route($app);
+            $routingResult = $router->route($request, $handler);
             if ($routingResult->didMatch()) {
                 break;
             }
@@ -72,6 +78,11 @@ class MetaRouter implements RouterInterface
 
     }
 
+    /**
+     * @param $route
+     * @param array $params
+     * @return null
+     */
     public function url($route, $params = [])
     {
         /** @var RouterInterface $router */

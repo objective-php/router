@@ -2,11 +2,14 @@
 
 namespace ObjectivePHP\Router;
 
-use ObjectivePHP\Application\ApplicationInterface;
+use ObjectivePHP\Config\ConfigProviderInterface;
 use ObjectivePHP\Router\Config\ActionNamespace;
 use ObjectivePHP\Router\Config\UrlAlias;
 use ObjectivePHP\Router\Exception\RoutingException;
+use ObjectivePHP\ServicesFactory\ServicesFactoryProviderInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * Class PathMapperRouter
@@ -17,9 +20,15 @@ use Psr\Http\Server\MiddlewareInterface;
  */
 class PathMapperRouter implements RouterInterface
 {
-    public function route(ApplicationInterface $app): RoutingResult
+    /**
+     * @param RequestHandlerInterface $handler
+     * @return RoutingResult
+     * @throws RoutingException
+     * @throws \ObjectivePHP\ServicesFactory\Exception\ServicesFactoryException
+     */
+    public function route(ServerRequestInterface $request, RequestHandlerInterface $handler): RoutingResult
     {
-        $path = rtrim($app->getRequest()->getUri()->getPath(), '/');
+        $path = rtrim($request->getUri()->getPath(), '/');
 
         // default to home
         if (!$path) {
@@ -27,30 +36,38 @@ class PathMapperRouter implements RouterInterface
         }
 
         // check if path is routed
-        $aliases = $app->getConfig()->get(UrlAlias::KEY);
-        if ($aliases) {
-            $path = $aliases[$path] ?? $path;
+        if ($handler instanceof ConfigProviderInterface) {
+            $aliases = $handler->getConfig()->get(UrlAlias::KEY);
+            if ($aliases) {
+                $path = $aliases[$path] ?? $path;
+            }
         }
 
         $action = null;
 
         // search for explicitly declared middleware
-        if ($app->getServicesFactory()->has($path)) {
-            $action = $app->getServicesFactory()->get($path);
+        if ($handler instanceof ServicesFactoryProviderInterface) {
+            if ($handler->getServicesFactory()->has($path)) {
+                $action = $handler->getServicesFactory()->get($path);
+            }
         } else {
 
             $actionClass = $this->resolveActionClassName($path);
 
-            $registeredActionNamespaces = $app->getConfig()->get(ActionNamespace::KEY);
-            
+            $registeredActionNamespaces = $handler->getConfig()->get(ActionNamespace::KEY);
+
             $actionFqcn = $this->resolveActionFullyQualifiedName($actionClass, $registeredActionNamespaces);
 
             if ($actionFqcn) {
-                if ($app->getServicesFactory()->has($actionFqcn)) {
-                    $action = $app->getServicesFactory()->get($actionFqcn);
+                if ($handler instanceof ServicesFactoryProviderInterface) {
+                    if ($handler->getServicesFactory()->has($actionFqcn)) {
+                        $action = $handler->getServicesFactory()->get($actionFqcn);
+                    } else {
+                        $action = new $actionFqcn;
+                        $handler->getServicesFactory()->injectDependencies($action);
+                    }
                 } else {
                     $action = new $actionFqcn;
-                    $app->getServicesFactory()->injectDependencies($action);
                 }
             }
 
@@ -73,9 +90,8 @@ class PathMapperRouter implements RouterInterface
 
     public function url($route, $params = [])
     {
-        // TODO: Implement url() method.
+        return ltrim('/' . $route, '/');
 
-        return null;
     }
 
     /**
