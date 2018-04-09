@@ -12,11 +12,14 @@ namespace ObjectivePHP\Router\Config;
 
 use ObjectivePHP\Config\Directive\AbstractScalarDirective;
 use ObjectivePHP\Config\Directive\MultiValueDirectiveInterface;
+use ObjectivePHP\Config\Directive\MultiValuesHandlingTrait;
 
 class UrlAlias extends AbstractScalarDirective implements MultiValueDirectiveInterface
 {
 
     const KEY = 'router.url-alias';
+
+    use MultiValuesHandlingTrait;
 
     protected $key = self::KEY;
 
