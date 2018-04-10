@@ -20,8 +20,6 @@ class UrlAlias extends AbstractScalarDirective implements MultiValueDirectiveInt
 
     const KEY = 'router.url-alias';
 
-    use MultiValuesHandlingTrait;
-
     protected $key = self::KEY;
 
 }

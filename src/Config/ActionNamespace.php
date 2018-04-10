@@ -17,7 +17,5 @@ class ActionNamespace extends AbstractScalarDirective implements MultiValueDirec
 {
     const KEY = 'router.action-namespace';
 
-    use MultiValuesHandlingTrait;
-
     protected $key = self::KEY;
 }
