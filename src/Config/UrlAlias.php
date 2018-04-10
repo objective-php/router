@@ -11,10 +11,11 @@ namespace ObjectivePHP\Router\Config;
 
 
 use ObjectivePHP\Config\Directive\AbstractScalarDirective;
+use ObjectivePHP\Config\Directive\IgnoreDefaultInterface;
 use ObjectivePHP\Config\Directive\MultiValueDirectiveInterface;
 use ObjectivePHP\Config\Directive\MultiValuesHandlingTrait;
 
-class UrlAlias extends AbstractScalarDirective implements MultiValueDirectiveInterface
+class UrlAlias extends AbstractScalarDirective implements MultiValueDirectiveInterface, IgnoreDefaultInterface
 {
 
     const KEY = 'router.url-alias';

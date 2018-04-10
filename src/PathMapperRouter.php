@@ -132,8 +132,9 @@ class PathMapperRouter implements RouterInterface
      */
     public function resolveActionFullyQualifiedName($className, $registeredActionNamespaces)
     {
-        //var_dump($registeredActionNamespaces);
+
         foreach ((array)$registeredActionNamespaces as $namespace) {
+
             $fullClassName = trim($namespace, '\\') . '\\' . $className;
             if (class_exists('\\' . $fullClassName)) {
                 return $fullClassName;
