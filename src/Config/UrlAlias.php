@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the Objective PHP project
  *
@@ -9,17 +10,16 @@
 
 namespace ObjectivePHP\Router\Config;
 
-
 use ObjectivePHP\Config\Directive\AbstractScalarDirective;
 use ObjectivePHP\Config\Directive\IgnoreDefaultInterface;
 use ObjectivePHP\Config\Directive\MultiValueDirectiveInterface;
-use ObjectivePHP\Config\Directive\MultiValuesHandlingTrait;
+use ObjectivePHP\Config\Directive\MultiValueDirectiveTrait;
 
 class UrlAlias extends AbstractScalarDirective implements MultiValueDirectiveInterface, IgnoreDefaultInterface
 {
+    use MultiValueDirectiveTrait;
 
     const KEY = 'router.url-alias';
 
     protected $key = self::KEY;
-
 }
