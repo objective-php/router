@@ -8,7 +8,6 @@ use ObjectivePHP\Router\Config\UrlAlias;
 use ObjectivePHP\Router\Exception\RoutingException;
 use ObjectivePHP\ServicesFactory\ServicesFactoryProviderInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
@@ -51,7 +50,6 @@ class PathMapperRouter implements RouterInterface
                 $action = $handler->getServicesFactory()->get($path);
             }
         } else {
-
             $actionClass = $this->resolveActionClassName($path);
 
             $registeredActionNamespaces = $handler->getConfig()->get(ActionNamespace::KEY);
@@ -70,28 +68,19 @@ class PathMapperRouter implements RouterInterface
                     $action = new $actionFqcn;
                 }
             }
-
         }
 
         if (!$action) {
             return new RoutingResult();
         }
 
-        // check action is a Middleware
-        if (!$action instanceof MiddlewareInterface) {
-            throw new RoutingException('Service matching current route does not implement ' . MiddlewareInterface::class);
-        }
-
-
         // return empty RoutingResult
         return new RoutingResult(new MatchedRoute($path, $action));
-
     }
 
     public function url($route, $params = [])
     {
         return ltrim('/' . $route, '/');
-
     }
 
     /**
@@ -101,14 +90,12 @@ class PathMapperRouter implements RouterInterface
      */
     protected function resolveActionClassName($path)
     {
-
         // clean path name
         $path = trim($path, '/');
 
         $namespaces = explode('/', $path);
 
         foreach ($namespaces as &$namespace) {
-
             $parts = explode('-', $namespace);
 
             array_walk($parts, function (&$part) {
@@ -132,9 +119,7 @@ class PathMapperRouter implements RouterInterface
      */
     public function resolveActionFullyQualifiedName($className, $registeredActionNamespaces)
     {
-
         foreach ((array)$registeredActionNamespaces as $namespace) {
-
             $fullClassName = trim($namespace, '\\') . '\\' . $className;
             if (class_exists('\\' . $fullClassName)) {
                 return $fullClassName;
@@ -143,5 +128,4 @@ class PathMapperRouter implements RouterInterface
 
         return null;
     }
-
 }

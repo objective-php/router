@@ -3,10 +3,8 @@
 namespace ObjectivePHP\Router;
 
 use ObjectivePHP\Primitives\Collection\Collection;
-use ObjectivePHP\Router\Exception\RoutingException;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-
 
 /**
  * Class MetaRouter
@@ -14,7 +12,6 @@ use Psr\Http\Server\RequestHandlerInterface;
  */
 class MetaRouter implements RouterInterface
 {
-
     /**
      * @var Collection
      */
@@ -50,17 +47,16 @@ class MetaRouter implements RouterInterface
     }
 
     /**
+     * @param ServerRequestInterface  $request
      * @param RequestHandlerInterface $handler
+     *
      * @return RoutingResult
-     * @throws RoutingException
      */
     public function route(ServerRequestInterface $request, RequestHandlerInterface $handler): RoutingResult
     {
-        if ($this->routers->isEmpty()) {
-            throw new RoutingException('Unable to route request: no router has been registered.', 500);
-        }
-
         $matchedRoute = null;
+
+        $routingResult = new RoutingResult();
 
         /** @var RouterInterface $router */
         foreach ($this->routers as $router) {
@@ -70,12 +66,7 @@ class MetaRouter implements RouterInterface
             }
         }
 
-        if (!$routingResult->didMatch()) {
-            throw new RoutingException('Unable to route request: no route matched requested URL', 404);
-        }
-
         return $routingResult;
-
     }
 
     /**
@@ -94,6 +85,4 @@ class MetaRouter implements RouterInterface
 
         return null;
     }
-
-
 }

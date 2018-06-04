@@ -2,7 +2,11 @@
 
 namespace ObjectivePHP\Router;
 
-
+/**
+ * Class RoutingResult
+ *
+ * @package ObjectivePHP\Router
+ */
 class RoutingResult
 {
     /**
@@ -16,7 +20,9 @@ class RoutingResult
      */
     public function __construct(MatchedRoute $matchedRoute = null)
     {
-        if ($matchedRoute) $this->matchedRoute = $matchedRoute;
+        if ($matchedRoute) {
+            $this->matchedRoute = $matchedRoute;
+        }
     }
 
     /**
@@ -34,5 +40,4 @@ class RoutingResult
     {
         return $this->matchedRoute;
     }
-
 }
