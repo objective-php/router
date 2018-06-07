@@ -6,6 +6,7 @@ use ObjectivePHP\Config\ConfigProviderInterface;
 use ObjectivePHP\Router\Config\ActionNamespace;
 use ObjectivePHP\Router\Config\UrlAlias;
 use ObjectivePHP\Router\Exception\RoutingException;
+use ObjectivePHP\ServicesFactory\Exception\ServicesFactoryException;
 use ObjectivePHP\ServicesFactory\ServicesFactoryProviderInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -57,15 +58,21 @@ class PathMapperRouter implements RouterInterface
             $actionFqcn = $this->resolveActionFullyQualifiedName($actionClass, $registeredActionNamespaces);
 
             if ($actionFqcn) {
-                if ($handler instanceof ServicesFactoryProviderInterface) {
-                    if ($handler->getServicesFactory()->has($actionFqcn)) {
-                        $action = $handler->getServicesFactory()->get($actionFqcn);
-                    } else {
-                        $action = new $actionFqcn;
-                        $handler->getServicesFactory()->injectDependencies($action);
-                    }
+                if ($handler instanceof ServicesFactoryProviderInterface
+                    && $handler->getServicesFactory()->has($actionFqcn)
+                ) {
+                    $action = $handler->getServicesFactory()->get($actionFqcn);
                 } else {
-                    $action = new $actionFqcn;
+                    try {
+                        $action = new $actionFqcn;
+                        if ($handler instanceof ServicesFactoryProviderInterface) {
+                            $handler->getServicesFactory()->injectDependencies($action);
+                        }
+                    } catch (ServicesFactoryException $servicesFactoryException) {
+                        throw $servicesFactoryException;
+                    } catch (\Throwable $e) {
+                        $action = null;
+                    }
                 }
             }
         }
