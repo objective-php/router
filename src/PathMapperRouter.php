@@ -46,10 +46,8 @@ class PathMapperRouter implements RouterInterface
         $action = null;
 
         // search for explicitly declared middleware
-        if ($handler instanceof ServicesFactoryProviderInterface) {
-            if ($handler->getServicesFactory()->has($path)) {
-                $action = $handler->getServicesFactory()->get($path);
-            }
+        if ($handler instanceof ServicesFactoryProviderInterface && $handler->getServicesFactory()->has($path)) {
+            $action = $handler->getServicesFactory()->get($path);
         } else {
             $actionClass = $this->resolveActionClassName($path);
 
@@ -63,16 +61,7 @@ class PathMapperRouter implements RouterInterface
                 ) {
                     $action = $handler->getServicesFactory()->get($actionFqcn);
                 } else {
-                    try {
-                        $action = new $actionFqcn;
-                        if ($handler instanceof ServicesFactoryProviderInterface) {
-                            $handler->getServicesFactory()->injectDependencies($action);
-                        }
-                    } catch (ServicesFactoryException $servicesFactoryException) {
-                        throw $servicesFactoryException;
-                    } catch (\Throwable $e) {
-                        $action = null;
-                    }
+                    $action = new $actionFqcn;
                 }
             }
         }
