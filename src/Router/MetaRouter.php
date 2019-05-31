@@ -1,10 +1,12 @@
 <?php
 
-namespace ObjectivePHP\Router;
+namespace ObjectivePHP\Router\Router;
 
 use ObjectivePHP\Primitives\Collection\Collection;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use ObjectivePHP\Router\RoutingResult;
+use ObjectivePHP\Router\MatchedRoute;
 
 /**
  * Class MetaRouter
@@ -25,6 +27,7 @@ class MetaRouter implements RouterInterface
     {
 
         $this->routers = Collection::cast($routers);
+        $this->routers->append(new PathMapperRouter(), new AssetsRouter());
     }
 
 

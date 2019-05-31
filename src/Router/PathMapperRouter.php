@@ -1,6 +1,6 @@
 <?php
 
-namespace ObjectivePHP\Router;
+namespace ObjectivePHP\Router\Router;
 
 use ObjectivePHP\Config\ConfigProviderInterface;
 use ObjectivePHP\Router\Config\ActionNamespace;
@@ -10,6 +10,8 @@ use ObjectivePHP\ServicesFactory\Exception\ServicesFactoryException;
 use ObjectivePHP\ServicesFactory\ServicesFactoryProviderInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use ObjectivePHP\Router\RoutingResult;
+use ObjectivePHP\Router\MatchedRoute;
 
 /**
  * Class PathMapperRouter

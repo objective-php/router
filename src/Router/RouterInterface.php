@@ -1,9 +1,10 @@
 <?php
 
-namespace ObjectivePHP\Router;
+namespace ObjectivePHP\Router\Router;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use ObjectivePHP\Router\RoutingResult;
 
 interface RouterInterface
 {
