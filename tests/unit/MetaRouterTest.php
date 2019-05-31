@@ -10,26 +10,24 @@ namespace Test\ObjectivePHP\Router;
 
 
 use Codeception\Test\Unit;
-use ObjectivePHP\Primitives\Collection\Collection;
 use ObjectivePHP\Router\Exception\RoutingException;
-use ObjectivePHP\Router\MetaRouter;
-use ObjectivePHP\Router\RouterInterface;
+use ObjectivePHP\Router\Router\MetaRouter;
+use ObjectivePHP\Router\Router\RouterInterface;
 use ObjectivePHP\Router\RoutingResult;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
+/**
+ * Class MetaRouterTest
+ * @package Test\ObjectivePHP\Router
+ */
 class MetaRouterTest extends Unit
 {
 
-    public function testFailsWhenRanWithoutRouters()
-    {
-        $metaRouter = new MetaRouter();
 
-        $this->expectException(RoutingException::class);
-
-        $metaRouter->route($this->makeEmpty(ServerRequestInterface::class), $this->makeEmpty(RequestHandlerInterface::class));
-    }
-
+    /**
+     * @throws \Exception
+     */
     public function testFailsWhenNoRouterMatchesARoute()
     {
         $metaRouter = new MetaRouter();
@@ -43,28 +41,30 @@ class MetaRouterTest extends Unit
         $this->expectException(RoutingException::class);
         $this->expectExceptionMessage('no route matched requested URL');
 
-        $metaRouter->route($this->makeEmpty(ServerRequestInterface::class), $this->makeEmpty(RequestHandlerInterface::class));
+        $metaRouter->route($this->makeEmpty(ServerRequestInterface::class),
+            $this->makeEmpty(RequestHandlerInterface::class));
     }
 
 
+    /**
+     * @throws \Exception
+     */
     public function testRoutersRegistration()
     {
 
         $metaRouter = new MetaRouter();
-
-        $this->assertEquals(new Collection(), $metaRouter->getRegisteredRouters());
 
         $router1 = $this->makeEmpty(RouterInterface::class);
         $router2 = $this->makeEmpty(RouterInterface::class);
 
         $metaRouter->registerRouter($router1);
 
-        $this->assertEquals(new Collection([$router1]), $metaRouter->getRegisteredRouters());
+        $this->assertCount(3, $metaRouter->getRegisteredRouters());
 
         $metaRouter->registerRouter($router2);
 
-        $this->assertSame($router2, $metaRouter->getRegisteredRouters()->toArray()[0]);
-        $this->assertSame($router1, $metaRouter->getRegisteredRouters()->toArray()[1]);
+        $this->assertSame($router2, $metaRouter->getRegisteredRouters()->toArray()[2]);
+        $this->assertSame($router1, $metaRouter->getRegisteredRouters()->toArray()[3]);
 
     }
 }

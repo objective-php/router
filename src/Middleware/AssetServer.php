@@ -4,7 +4,6 @@
 namespace ObjectivePHP\Router\Middleware;
 
 
-use function Couchbase\defaultDecoder;
 use ObjectivePHP\Application\Middleware\AbstractMiddleware;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -29,10 +28,12 @@ class AssetServer extends AbstractMiddleware
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        if(!is_file($this->file)) return new Response('File not found', 404);
+        if (!is_file($this->file)) {
+            return new Response('File not found', 404);
+        }
 
-        $extension = substr($this->file, strrpos($this->file, '.')+1);
-        switch($extension) {
+        $extension = substr($this->file, strrpos($this->file, '.') + 1);
+        switch ($extension) {
 
             case 'js':
                 $type = 'application/javascript';
@@ -51,7 +52,6 @@ class AssetServer extends AbstractMiddleware
         $content = file_get_contents($this->file);
         $response = new Response();
         $response->getBody()->write($content);
-
 
 
         $response = $response->withHeader('Content-type', $type);
