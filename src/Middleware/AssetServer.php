@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ObjectivePHP\DebuggingTools\Middleware;
+namespace ObjectivePHP\Router\Middleware;
 
 
 use function Couchbase\defaultDecoder;

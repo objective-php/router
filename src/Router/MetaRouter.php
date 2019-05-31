@@ -27,7 +27,7 @@ class MetaRouter implements RouterInterface
     {
 
         $this->routers = Collection::cast($routers);
-        $this->routers->append(new PathMapperRouter(), new AssetsRouter());
+        $this->routers->append(new AssetsRouter(), new PathMapperRouter());
     }
 
 

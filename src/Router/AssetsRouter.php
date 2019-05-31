@@ -4,7 +4,7 @@
 namespace ObjectivePHP\Router\Router;
 
 
-use ObjectivePHP\DebuggingTools\Middleware\AssetServer;
+use ObjectivePHP\Router\Middleware\AssetServer;
 use ObjectivePHP\Router\MatchedRoute;
 use ObjectivePHP\Router\RoutingResult;
 use Psr\Http\Message\ServerRequestInterface;
