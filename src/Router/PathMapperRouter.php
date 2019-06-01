@@ -6,12 +6,11 @@ use ObjectivePHP\Config\ConfigProviderInterface;
 use ObjectivePHP\Router\Config\ActionNamespace;
 use ObjectivePHP\Router\Config\UrlAlias;
 use ObjectivePHP\Router\Exception\RoutingException;
-use ObjectivePHP\ServicesFactory\Exception\ServicesFactoryException;
+use ObjectivePHP\Router\MatchedRoute;
+use ObjectivePHP\Router\RoutingResult;
 use ObjectivePHP\ServicesFactory\ServicesFactoryProviderInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use ObjectivePHP\Router\RoutingResult;
-use ObjectivePHP\Router\MatchedRoute;
 
 /**
  * Class PathMapperRouter
@@ -30,6 +29,10 @@ class PathMapperRouter implements RouterInterface
      */
     public function route(ServerRequestInterface $request, RequestHandlerInterface $handler): RoutingResult
     {
+        if (!$request->getUri()) {
+            return new RoutingResult();
+        }
+        
         $path = rtrim($request->getUri()->getPath(), '/');
 
         // default to home

@@ -10,7 +10,6 @@ namespace Test\ObjectivePHP\Router;
 
 
 use Codeception\Test\Unit;
-use ObjectivePHP\Router\Exception\RoutingException;
 use ObjectivePHP\Router\Router\MetaRouter;
 use ObjectivePHP\Router\Router\RouterInterface;
 use ObjectivePHP\Router\RoutingResult;
@@ -28,7 +27,7 @@ class MetaRouterTest extends Unit
     /**
      * @throws \Exception
      */
-    public function testFailsWhenNoRouterMatchesARoute()
+    public function testMetaRouterDoesNotFailWhenNoRouterMatchesARoute()
     {
         $metaRouter = new MetaRouter();
 
@@ -38,11 +37,10 @@ class MetaRouterTest extends Unit
 
         $metaRouter->registerRouter($router);
 
-        $this->expectException(RoutingException::class);
-        $this->expectExceptionMessage('no route matched requested URL');
-
-        $metaRouter->route($this->makeEmpty(ServerRequestInterface::class),
+        $routingResult = $metaRouter->route($this->makeEmpty(ServerRequestInterface::class),
             $this->makeEmpty(RequestHandlerInterface::class));
+
+        $this->assertFalse($routingResult->didMatch());
     }
 
 
@@ -63,8 +61,8 @@ class MetaRouterTest extends Unit
 
         $metaRouter->registerRouter($router2);
 
-        $this->assertSame($router2, $metaRouter->getRegisteredRouters()->toArray()[2]);
-        $this->assertSame($router1, $metaRouter->getRegisteredRouters()->toArray()[3]);
+        $this->assertSame($router2, $metaRouter->getRegisteredRouters()->toArray()[0]);
+        $this->assertSame($router1, $metaRouter->getRegisteredRouters()->toArray()[1]);
 
     }
 }

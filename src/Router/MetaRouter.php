@@ -3,10 +3,9 @@
 namespace ObjectivePHP\Router\Router;
 
 use ObjectivePHP\Primitives\Collection\Collection;
+use ObjectivePHP\Router\RoutingResult;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use ObjectivePHP\Router\RoutingResult;
-use ObjectivePHP\Router\MatchedRoute;
 
 /**
  * Class MetaRouter
@@ -50,15 +49,13 @@ class MetaRouter implements RouterInterface
     }
 
     /**
-     * @param ServerRequestInterface  $request
+     * @param ServerRequestInterface $request
      * @param RequestHandlerInterface $handler
      *
      * @return RoutingResult
      */
     public function route(ServerRequestInterface $request, RequestHandlerInterface $handler): RoutingResult
     {
-        $matchedRoute = null;
-
         $routingResult = new RoutingResult();
 
         /** @var RouterInterface $router */
