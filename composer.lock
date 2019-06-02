@@ -1,11 +1,62 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "81e9945a038383315897b06fe3e232f3",
+    "content-hash": "a292a134295e0a7f9afab870c6e8b83f",
     "packages": [
+        {
+            "name": "objective-php/docu-mentor",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/objective-php/docu-mentor.git",
+                "reference": "243fc7e76ab0cc9c7567e0bd3699adca95a96200"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/objective-php/docu-mentor/zipball/243fc7e76ab0cc9c7567e0bd3699adca95a96200",
+                "reference": "243fc7e76ab0cc9c7567e0bd3699adca95a96200",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0",
+                "phpdocumentor/reflection-docblock": "^4.3",
+                "symfony/finder": "^4.0"
+            },
+            "require-dev": {
+                "objective-php/config": "^2.0.0"
+            },
+            "bin": [
+                "bin/docu"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ObjectivePHP\\DocuMentor\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Louis Cuny",
+                    "email": "louis-cuny@gmx.fr",
+                    "role": "Intern"
+                }
+            ],
+            "description": "Tool to generate Objective-php's markdown documentation",
+            "homepage": "https://github.com/objective-php/docu-mentor",
+            "keywords": [
+                "doc",
+                "markdown",
+                "objective php"
+            ],
+            "time": "2019-06-02T15:12:18+00:00"
+        },
         {
             "name": "objective-php/primitives",
             "version": "v1.3.7",
@@ -59,6 +110,158 @@
                 "primitives"
             ],
             "time": "2017-09-04T12:32:58+00:00"
+        },
+        {
+            "name": "phpdocumentor/reflection-common",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/ReflectionCommon.git",
+                "reference": "21bdeb5f65d7ebf9f43b1b25d404f87deab5bfb6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionCommon/zipball/21bdeb5f65d7ebf9f43b1b25d404f87deab5bfb6",
+                "reference": "21bdeb5f65d7ebf9f43b1b25d404f87deab5bfb6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.6"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "phpDocumentor\\Reflection\\": [
+                        "src"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jaap van Otterdijk",
+                    "email": "opensource@ijaap.nl"
+                }
+            ],
+            "description": "Common reflection classes used by phpdocumentor to reflect the code structure",
+            "homepage": "http://www.phpdoc.org",
+            "keywords": [
+                "FQSEN",
+                "phpDocumentor",
+                "phpdoc",
+                "reflection",
+                "static analysis"
+            ],
+            "time": "2017-09-11T18:02:19+00:00"
+        },
+        {
+            "name": "phpdocumentor/reflection-docblock",
+            "version": "4.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
+                "reference": "bdd9f737ebc2a01c06ea7ff4308ec6697db9b53c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/bdd9f737ebc2a01c06ea7ff4308ec6697db9b53c",
+                "reference": "bdd9f737ebc2a01c06ea7ff4308ec6697db9b53c",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0",
+                "phpdocumentor/reflection-common": "^1.0.0",
+                "phpdocumentor/type-resolver": "^0.4.0",
+                "webmozart/assert": "^1.0"
+            },
+            "require-dev": {
+                "doctrine/instantiator": "~1.0.5",
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "^6.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "phpDocumentor\\Reflection\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike van Riel",
+                    "email": "me@mikevanriel.com"
+                }
+            ],
+            "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
+            "time": "2019-04-30T17:48:53+00:00"
+        },
+        {
+            "name": "phpdocumentor/type-resolver",
+            "version": "0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/TypeResolver.git",
+                "reference": "9c977708995954784726e25d0cd1dddf4e65b0f7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/9c977708995954784726e25d0cd1dddf4e65b0f7",
+                "reference": "9c977708995954784726e25d0cd1dddf4e65b0f7",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.5 || ^7.0",
+                "phpdocumentor/reflection-common": "^1.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "^5.2||^4.8.24"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "phpDocumentor\\Reflection\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike van Riel",
+                    "email": "me@mikevanriel.com"
+                }
+            ],
+            "time": "2017-07-14T14:27:02+00:00"
         },
         {
             "name": "psr/http-message",
@@ -215,6 +418,164 @@
                 "response"
             ],
             "time": "2018-10-30T17:12:04+00:00"
+        },
+        {
+            "name": "symfony/finder",
+            "version": "v4.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/finder.git",
+                "reference": "b3d4f4c0e4eadfdd8b296af9ca637cfbf51d8176"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/b3d4f4c0e4eadfdd8b296af9ca637cfbf51d8176",
+                "reference": "b3d4f4c0e4eadfdd8b296af9ca637cfbf51d8176",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Finder\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Finder Component",
+            "homepage": "https://symfony.com",
+            "time": "2019-05-26T20:47:49+00:00"
+        },
+        {
+            "name": "symfony/polyfill-ctype",
+            "version": "v1.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-ctype.git",
+                "reference": "82ebae02209c21113908c229e9883c419720738a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/82ebae02209c21113908c229e9883c419720738a",
+                "reference": "82ebae02209c21113908c229e9883c419720738a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "ext-ctype": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.11-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Ctype\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                },
+                {
+                    "name": "Gert de Pagter",
+                    "email": "BackEndTea@gmail.com"
+                }
+            ],
+            "description": "Symfony polyfill for ctype functions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "ctype",
+                "polyfill",
+                "portable"
+            ],
+            "time": "2019-02-06T07:57:58+00:00"
+        },
+        {
+            "name": "webmozart/assert",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webmozart/assert.git",
+                "reference": "83e253c8e0be5b0257b881e1827274667c5c17a9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webmozart/assert/zipball/83e253c8e0be5b0257b881e1827274667c5c17a9",
+                "reference": "83e253c8e0be5b0257b881e1827274667c5c17a9",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.3 || ^7.0",
+                "symfony/polyfill-ctype": "^1.8"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.6",
+                "sebastian/version": "^1.0.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Webmozart\\Assert\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bernhard Schussek",
+                    "email": "bschussek@gmail.com"
+                }
+            ],
+            "description": "Assertions to validate method input/output with nice error messages.",
+            "keywords": [
+                "assert",
+                "check",
+                "validate"
+            ],
+            "time": "2018-12-25T11:19:39+00:00"
         }
     ],
     "packages-dev": [
@@ -1493,62 +1854,6 @@
             "time": "2019-04-07T13:18:21+00:00"
         },
         {
-            "name": "objective-php/application",
-            "version": "v3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/objective-php/application.git",
-                "reference": "73c9aeea666d1a208b2032ce7ea3692ffcf53179"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/objective-php/application/zipball/73c9aeea666d1a208b2032ce7ea3692ffcf53179",
-                "reference": "73c9aeea666d1a208b2032ce7ea3692ffcf53179",
-                "shasum": ""
-            },
-            "require": {
-                "objective-php/config": "^3.0.0@dev",
-                "objective-php/events-handler": "^2.0.0",
-                "objective-php/filter": "^1.0.0",
-                "objective-php/matcher": "^1.0.0",
-                "objective-php/notification": "^1.0.0",
-                "objective-php/primitives": "^1.3.0",
-                "objective-php/router": "dev-master@dev",
-                "objective-php/services-factory": "^3.0.1",
-                "php": ">=7.3",
-                "psr/http-server-handler": "^1.0",
-                "psr/http-server-middleware": "^1.0",
-                "zendframework/zend-diactoros": "^1.7"
-            },
-            "require-dev": {
-                "codeception/codeception": "^3.0"
-            },
-            "type": "framework",
-            "autoload": {
-                "psr-4": {
-                    "ObjectivePHP\\Application\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Gauthier 'Rusty' Delamarre",
-                    "email": "gauthier@objective-php.org",
-                    "role": "lead"
-                }
-            ],
-            "description": "Objective PHP applicative framework",
-            "homepage": "https://github.com/objective-php/application",
-            "keywords": [
-                "framework",
-                "objective php"
-            ],
-            "time": "2019-05-31T16:37:45+00:00"
-        },
-        {
             "name": "objective-php/config",
             "version": "v3.0.0",
             "source": {
@@ -1596,171 +1901,24 @@
             "time": "2019-05-31T07:39:41+00:00"
         },
         {
-            "name": "objective-php/docu-mentor",
-            "version": "v1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/objective-php/docu-mentor.git",
-                "reference": "cd42fb04c6790c77618931f700acd1ffe441bc34"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/objective-php/docu-mentor/zipball/cd42fb04c6790c77618931f700acd1ffe441bc34",
-                "reference": "cd42fb04c6790c77618931f700acd1ffe441bc34",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0",
-                "phpdocumentor/reflection-docblock": "^4.3",
-                "symfony/finder": "^4.0"
-            },
-            "require-dev": {
-                "objective-php/config": "^2.0.0"
-            },
-            "bin": [
-                "bin/docu"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ObjectivePHP\\DocuMentor\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Louis Cuny",
-                    "email": "louis-cuny@gmx.fr",
-                    "role": "Intern"
-                }
-            ],
-            "description": "Tool to generate Objective-php's markdown documentation",
-            "homepage": "https://github.com/objective-php/docu-mentor",
-            "keywords": [
-                "doc",
-                "markdown",
-                "objective php"
-            ],
-            "time": "2018-06-26T14:56:39+00:00"
-        },
-        {
-            "name": "objective-php/events-handler",
-            "version": "v2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/objective-php/events-handler.git",
-                "reference": "2e8fb6c5649bb1cc22ae4541ea0467031b4505ed"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/objective-php/events-handler/zipball/2e8fb6c5649bb1cc22ae4541ea0467031b4505ed",
-                "reference": "2e8fb6c5649bb1cc22ae4541ea0467031b4505ed",
-                "shasum": ""
-            },
-            "require": {
-                "objective-php/matcher": "^1.0",
-                "objective-php/primitives": "^1.3.0",
-                "php": ">=7.0"
-            },
-            "require-dev": {
-                "codeception/codeception": "^2.4",
-                "objective-php/services-factory": "^2.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ObjectivePHP\\Events\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Gauthier 'Rusty' Delamarre",
-                    "email": "gauthier@objective-php.org",
-                    "role": "lead"
-                }
-            ],
-            "description": "Events Handler for ObjectivePHP",
-            "homepage": "https://github.com/objective-php/events-handler",
-            "keywords": [
-                "events",
-                "events handler",
-                "objective php"
-            ],
-            "time": "2018-04-09T14:16:54+00:00"
-        },
-        {
-            "name": "objective-php/filter",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/objective-php/filter.git",
-                "reference": "464ad4bbab00dc245e9299a91053f943080b3b5b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/objective-php/filter/zipball/464ad4bbab00dc245e9299a91053f943080b3b5b",
-                "reference": "464ad4bbab00dc245e9299a91053f943080b3b5b",
-                "shasum": ""
-            },
-            "require": {
-                "objective-php/primitives": "^1.3",
-                "php": "^7.0"
-            },
-            "require-dev": {
-                "codeception/codeception": "^2.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ObjectivePHP\\Filter\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Gauthier 'Rusty' Delamarre",
-                    "email": "gauthier@objective-php.org",
-                    "role": "lead"
-                }
-            ],
-            "description": "Conditional filter engine",
-            "homepage": "https://github.com/objective-php/filter",
-            "keywords": [
-                "filter",
-                "objective php"
-            ],
-            "time": "2018-04-30T09:53:42+00:00"
-        },
-        {
             "name": "objective-php/matcher",
-            "version": "v1.0.2",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/objective-php/matcher.git",
-                "reference": "b7b1339b7388971760b118dd109316a0a9691591"
+                "reference": "c72e3fe027e96c7f0c6d1ab83ebbb8ea9ec9b184"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/objective-php/matcher/zipball/b7b1339b7388971760b118dd109316a0a9691591",
-                "reference": "b7b1339b7388971760b118dd109316a0a9691591",
+                "url": "https://api.github.com/repos/objective-php/matcher/zipball/c72e3fe027e96c7f0c6d1ab83ebbb8ea9ec9b184",
+                "reference": "c72e3fe027e96c7f0c6d1ab83ebbb8ea9ec9b184",
                 "shasum": ""
             },
             "require": {
-                "objective-php/phpunit-extension": "~1.0",
-                "php": ">=7.0"
+                "php": ">=7.1"
             },
             "require-dev": {
-                "phpunit/phpunit": "5.*"
+                "codeception/codeception": "^3.0"
             },
             "type": "library",
             "autoload": {
@@ -1785,105 +1943,7 @@
                 "matcher",
                 "objective php"
             ],
-            "time": "2018-01-08T15:44:02+00:00"
-        },
-        {
-            "name": "objective-php/notification",
-            "version": "v1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/objective-php/notification.git",
-                "reference": "84a19da958680c4f4693f7808fe500b2f30211c4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/objective-php/notification/zipball/84a19da958680c4f4693f7808fe500b2f30211c4",
-                "reference": "84a19da958680c4f4693f7808fe500b2f30211c4",
-                "shasum": ""
-            },
-            "require": {
-                "objective-php/matcher": "1.*",
-                "objective-php/primitives": "1.*",
-                "php": ">=7.0"
-            },
-            "require-dev": {
-                "objective-php/phpunit-extension": "1.*",
-                "phpunit/phpunit": "5.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ObjectivePHP\\Notification\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Gauthier 'Rusty' Delamarre",
-                    "email": "gauthier@objective-php.org",
-                    "role": "lead"
-                },
-                {
-                    "name": "Jérôme 'Neofox' Schaeffer",
-                    "email": "jerome@objective-php.org",
-                    "role": "dev"
-                }
-            ],
-            "description": "Objective PHP Notification component",
-            "homepage": "https://github.com/objective-php/notification",
-            "keywords": [
-                "components",
-                "objective php"
-            ],
-            "time": "2017-04-26T16:31:48+00:00"
-        },
-        {
-            "name": "objective-php/phpunit-extension",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/objective-php/phpunit-extension.git",
-                "reference": "1b3e2b516585e828a947248d571b3f966b768e0f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/objective-php/phpunit-extension/zipball/1b3e2b516585e828a947248d571b3f966b768e0f",
-                "reference": "1b3e2b516585e828a947248d571b3f966b768e0f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "5.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ObjectivePHP\\PHPUnit\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Gauthier 'Rusty' Delamarre",
-                    "email": "gauthier@objective-php.org",
-                    "role": "lead"
-                }
-            ],
-            "description": "Some add-ons for PHPUnit Unit Test Framework",
-            "homepage": "https://github.com/objective-php/phpunit-extension",
-            "keywords": [
-                "objective php",
-                "phpunit"
-            ],
-            "time": "2016-05-05T12:55:53+00:00"
+            "time": "2019-05-31T15:18:44+00:00"
         },
         {
             "name": "objective-php/services-factory",
@@ -2040,158 +2100,6 @@
             ],
             "description": "Library for handling version information and constraints",
             "time": "2018-07-08T19:19:57+00:00"
-        },
-        {
-            "name": "phpdocumentor/reflection-common",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpDocumentor/ReflectionCommon.git",
-                "reference": "21bdeb5f65d7ebf9f43b1b25d404f87deab5bfb6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionCommon/zipball/21bdeb5f65d7ebf9f43b1b25d404f87deab5bfb6",
-                "reference": "21bdeb5f65d7ebf9f43b1b25d404f87deab5bfb6",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.6"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "phpDocumentor\\Reflection\\": [
-                        "src"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jaap van Otterdijk",
-                    "email": "opensource@ijaap.nl"
-                }
-            ],
-            "description": "Common reflection classes used by phpdocumentor to reflect the code structure",
-            "homepage": "http://www.phpdoc.org",
-            "keywords": [
-                "FQSEN",
-                "phpDocumentor",
-                "phpdoc",
-                "reflection",
-                "static analysis"
-            ],
-            "time": "2017-09-11T18:02:19+00:00"
-        },
-        {
-            "name": "phpdocumentor/reflection-docblock",
-            "version": "4.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "bdd9f737ebc2a01c06ea7ff4308ec6697db9b53c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/bdd9f737ebc2a01c06ea7ff4308ec6697db9b53c",
-                "reference": "bdd9f737ebc2a01c06ea7ff4308ec6697db9b53c",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0",
-                "phpdocumentor/reflection-common": "^1.0.0",
-                "phpdocumentor/type-resolver": "^0.4.0",
-                "webmozart/assert": "^1.0"
-            },
-            "require-dev": {
-                "doctrine/instantiator": "~1.0.5",
-                "mockery/mockery": "^1.0",
-                "phpunit/phpunit": "^6.4"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "phpDocumentor\\Reflection\\": [
-                        "src/"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mike van Riel",
-                    "email": "me@mikevanriel.com"
-                }
-            ],
-            "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2019-04-30T17:48:53+00:00"
-        },
-        {
-            "name": "phpdocumentor/type-resolver",
-            "version": "0.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "9c977708995954784726e25d0cd1dddf4e65b0f7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/9c977708995954784726e25d0cd1dddf4e65b0f7",
-                "reference": "9c977708995954784726e25d0cd1dddf4e65b0f7",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.5 || ^7.0",
-                "phpdocumentor/reflection-common": "^1.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "^0.9.4",
-                "phpunit/phpunit": "^5.2||^4.8.24"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "phpDocumentor\\Reflection\\": [
-                        "src/"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mike van Riel",
-                    "email": "me@mikevanriel.com"
-                }
-            ],
-            "time": "2017-07-14T14:27:02+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -3625,113 +3533,6 @@
             "time": "2019-05-22T12:23:29+00:00"
         },
         {
-            "name": "symfony/finder",
-            "version": "v4.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/finder.git",
-                "reference": "b3d4f4c0e4eadfdd8b296af9ca637cfbf51d8176"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/b3d4f4c0e4eadfdd8b296af9ca637cfbf51d8176",
-                "reference": "b3d4f4c0e4eadfdd8b296af9ca637cfbf51d8176",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Finder\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Finder Component",
-            "homepage": "https://symfony.com",
-            "time": "2019-05-26T20:47:49+00:00"
-        },
-        {
-            "name": "symfony/polyfill-ctype",
-            "version": "v1.11.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "82ebae02209c21113908c229e9883c419720738a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/82ebae02209c21113908c229e9883c419720738a",
-                "reference": "82ebae02209c21113908c229e9883c419720738a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "suggest": {
-                "ext-ctype": "For best performance"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.11-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Ctype\\": ""
-                },
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                },
-                {
-                    "name": "Gert de Pagter",
-                    "email": "BackEndTea@gmail.com"
-                }
-            ],
-            "description": "Symfony polyfill for ctype functions",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
-                "ctype",
-                "polyfill",
-                "portable"
-            ],
-            "time": "2019-02-06T07:57:58+00:00"
-        },
-        {
             "name": "symfony/polyfill-mbstring",
             "version": "v1.11.0",
             "source": {
@@ -4053,121 +3854,6 @@
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
             "time": "2019-04-04T09:56:43+00:00"
-        },
-        {
-            "name": "webmozart/assert",
-            "version": "1.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/webmozart/assert.git",
-                "reference": "83e253c8e0be5b0257b881e1827274667c5c17a9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/83e253c8e0be5b0257b881e1827274667c5c17a9",
-                "reference": "83e253c8e0be5b0257b881e1827274667c5c17a9",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.3.3 || ^7.0",
-                "symfony/polyfill-ctype": "^1.8"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.6",
-                "sebastian/version": "^1.0.1"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Webmozart\\Assert\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Bernhard Schussek",
-                    "email": "bschussek@gmail.com"
-                }
-            ],
-            "description": "Assertions to validate method input/output with nice error messages.",
-            "keywords": [
-                "assert",
-                "check",
-                "validate"
-            ],
-            "time": "2018-12-25T11:19:39+00:00"
-        },
-        {
-            "name": "zendframework/zend-diactoros",
-            "version": "1.8.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-diactoros.git",
-                "reference": "20da13beba0dde8fb648be3cc19765732790f46e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/20da13beba0dde8fb648be3cc19765732790f46e",
-                "reference": "20da13beba0dde8fb648be3cc19765732790f46e",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0",
-                "psr/http-message": "^1.0"
-            },
-            "provide": {
-                "psr/http-message-implementation": "1.0"
-            },
-            "require-dev": {
-                "ext-dom": "*",
-                "ext-libxml": "*",
-                "php-http/psr7-integration-tests": "dev-master",
-                "phpunit/phpunit": "^5.7.16 || ^6.0.8 || ^7.2.7",
-                "zendframework/zend-coding-standard": "~1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.8.x-dev",
-                    "dev-develop": "1.9.x-dev",
-                    "dev-release-2.0": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/functions/create_uploaded_file.php",
-                    "src/functions/marshal_headers_from_sapi.php",
-                    "src/functions/marshal_method_from_sapi.php",
-                    "src/functions/marshal_protocol_version_from_sapi.php",
-                    "src/functions/marshal_uri_from_sapi.php",
-                    "src/functions/normalize_server.php",
-                    "src/functions/normalize_uploaded_files.php",
-                    "src/functions/parse_cookie_header.php"
-                ],
-                "psr-4": {
-                    "Zend\\Diactoros\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "description": "PSR HTTP Message implementations",
-            "homepage": "https://github.com/zendframework/zend-diactoros",
-            "keywords": [
-                "http",
-                "psr",
-                "psr-7"
-            ],
-            "time": "2018-09-05T19:29:37+00:00"
         }
     ],
     "aliases": [],
@@ -4176,7 +3862,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.3"
+        "php": ">=7.0"
     },
     "platform-dev": []
 }
