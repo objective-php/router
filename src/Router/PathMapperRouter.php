@@ -32,7 +32,7 @@ class PathMapperRouter implements RouterInterface
         if (!$request->getUri()) {
             return new RoutingResult();
         }
-        
+
         $path = rtrim($request->getUri()->getPath(), '/');
 
         // default to home
@@ -120,6 +120,7 @@ class PathMapperRouter implements RouterInterface
      */
     public function resolveActionFullyQualifiedName($className, $registeredActionNamespaces)
     {
+        $registeredActionNamespaces = array_reverse($registeredActionNamespaces);
         foreach ((array)$registeredActionNamespaces as $namespace) {
             $fullClassName = trim($namespace, '\\') . '\\' . $className;
             if (class_exists('\\' . $fullClassName)) {

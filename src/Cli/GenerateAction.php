@@ -71,7 +71,7 @@ class GenerateAction extends AbstractCliAction
         $classToGenerate = $this->pathToClass($action, $actionNamespace);
 
         /** @var ClassLoader $autoloader */
-        $autoloader = $this->getApplication()->getEngine()->getAutoloader();
+        $autoloader = $app->getEngine()->getAutoloader();
 
         $paths = $autoloader->getPrefixesPsr4();
         $matchingPaths = [];
@@ -173,7 +173,7 @@ class GenerateAction extends AbstractCliAction
 <?php
 namespace $namespace;
 
-use ObjectivePHP\Middleware\Action\PhtmlAction\PhtmlAction;
+use ObjectivePHP\PhtmlAction\PhtmlAction;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
